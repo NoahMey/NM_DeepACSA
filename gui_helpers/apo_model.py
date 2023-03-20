@@ -6,6 +6,8 @@ from skimage.transform import resize
 from skimage import morphology, measure
 from keras import backend as K
 from keras.models import load_model
+from keras_unet_collection.transformer_layers import patch_extract, patch_embedding, SwinTransformerBlock, patch_merging, patch_expanding #used for Trans/Swin-Architecture
+from keras_unet_collection.activations import GELU, Snake #used for Trans-Architecture
 
 import matplotlib.pyplot as plt
 plt.style.use("ggplot")
@@ -69,7 +71,14 @@ class ApoModel:
         self.model_path = model_path
         self.model_apo = load_model(
             self.model_path,
-            custom_objects={'IoU': IoU}
+            custom_objects={'IoU': IoU, 
+                            "patch_extract": patch_extract, #requirement of Swin and Trans
+                            "patch_embedding": patch_embedding, #requirement of Swin and Trans
+                            "SwinTransformerBlock": SwinTransformerBlock, #requirement of Swin
+                            "patch_merging": patch_merging, #requirement of Swin
+                            "patch_expanding": patch_expanding, #requirement of Swin
+                            "GELU": GELU, #requirement of Trans
+                            "Snake": Snake} #requirement of Trans
         )
         self.apo_threshold = apo_threshold
 
