@@ -1,5 +1,5 @@
 trained_models
 notebooks
 __pycache__
-!spec/*.h5
-!spec/*.csv
+*.h5
+*.csv

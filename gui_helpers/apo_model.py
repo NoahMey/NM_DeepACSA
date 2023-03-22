@@ -126,7 +126,10 @@ class ApoModel:
                                                     connectivity=100).astype(int)
         # calculate circumference
         pred_apo_conts = pred_apo_th.astype(np.uint8)
+        #print (pred_apo_conts, "pred_apo")
+        #print (findContours(pred_apo_conts, RETR_LIST, CHAIN_APPROX_SIMPLE))
         conts, hirarchy = findContours(pred_apo_conts, RETR_LIST, CHAIN_APPROX_SIMPLE)
+        #print (conts)
         for cont in conts:
             circum = arcLength(cont, True)
 
