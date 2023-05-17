@@ -129,6 +129,7 @@ class ApoModel:
         conts, hirarchy = findContours(pred_apo_conts, RETR_LIST, CHAIN_APPROX_SIMPLE)
         for cont in conts:
             circum = arcLength(cont, True)
+        circum = 1
 
         return circum, pred_apo_th
 
